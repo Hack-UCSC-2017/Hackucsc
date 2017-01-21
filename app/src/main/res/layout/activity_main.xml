@@ -10,13 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hackucsc.hackucsc.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="161dp" />
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webview" />
 </RelativeLayout>
