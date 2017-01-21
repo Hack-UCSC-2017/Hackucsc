@@ -22,6 +22,7 @@
                 <category android:name="com.google.intent.category.DAYDREAM"/>
             </intent-filter>
         </activity>
+        <service android:name=".NotificationService" />
     </application>
 
 </manifest>
