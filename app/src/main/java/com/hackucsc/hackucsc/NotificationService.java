@@ -7,6 +7,8 @@ import android.app.Notification;
 import android.os.IBinder;
 
 public class NotificationService extends Service {
+    Notification.Action change = new Notification.Action(0, "Pause", null);
+//    Notification.Action settings = new Notification.Action(0, "Settings", null);
 
     public NotificationService() {
 
@@ -19,14 +21,15 @@ public class NotificationService extends Service {
 
         Notification notification = new Notification.Builder(this)
                 .setContentTitle("SteadyView")
-                .setContentText("Running, tap to pause")
+                .setContentText("Running")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .addAction(0, "Pause", null)
-                .addAction(0, "Settings", null)
+                .addAction(change)
+//                .addAction(settings)
                 .setContentIntent(pendingIntent)
                 .build();
 
-        startForeground(1, notification);
+        int nId = (int) System.currentTimeMillis();
+        startForeground(nId, notification);
         return Service.START_STICKY;
     }
 
