@@ -67,11 +67,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         xdpm = metrics.xdpi/0.0254;
         ydpm = metrics.ydpi/0.0254;
 
-        halfperiods[0] = new rollingQueue(100);
-        halfperiods[1] = new rollingQueue(100);
 
-        amplitudes[0] = new rollingQueue(100);
-        amplitudes[1] = new rollingQueue(100);
+        int hpsamples = 100;
+        int ampsamples = 100;
+
+        halfperiods[0] = new rollingQueue(hpsamples);
+        halfperiods[1] = new rollingQueue(hpsamples);
+
+        amplitudes[0] = new rollingQueue(ampsamples);
+        amplitudes[1] = new rollingQueue(ampsamples);
 
         //float inchpix = (float) (metrics.xdpi);
         //web.setX(inchpix);
@@ -140,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         halfperiods[i].push(timestamp - lastZeroTime[i]);
                         double fold = f[i];
                         f[i] = 2.0/halfperiods[i].average();
-                        //phase[i] = phase[i] +timestamp*(f[i] - fold);
+                        phase[i] = ((phase[i] +timestamp*fold)%(2*Math.PI)) - (f[i]*timestamp % (2*Math.PI));
                         //Calculate period
                     }
                     lastZeroTime[i] = timestamp;
