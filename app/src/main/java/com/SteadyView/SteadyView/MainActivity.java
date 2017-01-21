@@ -21,10 +21,6 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float inchesY = metrics.heightPixels / metrics.ydpi;
         float inchesX = metrics.widthPixels / metrics.xdpi;
-        System.out.println("X pixels: "+metrics.widthPixels);
-        System.out.println("Y pixels: "+metrics.heightPixels);
-        System.out.println("X inches: "+inchesX);
-        System.out.println("Y inches: "+inchesY);
         float metersX = inchesX * 0.0254f;
         float metersY = inchesY * 0.0254f;
     }
