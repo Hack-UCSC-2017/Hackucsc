@@ -1,4 +1,4 @@
-package com.hackucsc.hackucsc;
+package com.SteadyView.SteadyView;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

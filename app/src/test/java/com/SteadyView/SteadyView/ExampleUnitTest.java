@@ -1,4 +1,4 @@
-package com.hackucsc.hackucsc;
+package com.SteadyView.SteadyView;
 
 import org.junit.Test;
 
