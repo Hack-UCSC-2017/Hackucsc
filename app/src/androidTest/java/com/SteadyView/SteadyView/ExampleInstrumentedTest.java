@@ -1,4 +1,4 @@
-package com.hackucsc.hackucsc;
+package com.SteadyView.SteadyView;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.hackucsc.hackucsc", appContext.getPackageName());
+        assertEquals("com.SteadyView.SteadyView", appContext.getPackageName());
     }
 }
