@@ -109,7 +109,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         });
 
         findViewById(R.id.buttonTalk).bringToFront();
-        findViewById(R.id.buttonSettings).bringToFront();
+        //findViewById(R.id.buttonSettings).bringToFront();
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
