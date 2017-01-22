@@ -23,6 +23,7 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        System.out.println("\n\n\nNotificationService: Constants.text: " + Constants.text);
         Intent notificationIntent = new Intent(this, MainActivity.class);
         notificationIntent.setAction("startMain");
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
@@ -34,8 +35,17 @@ public class NotificationService extends Service {
         changeIntent.setAction("startChange");
         PendingIntent pChangeIntent = PendingIntent.getService(this, 0, changeIntent, 0);
 
-        NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        if (intent.getAction().equals("startChange")) {
+            if (Constants.text.equals("Running")) {
+                Constants.text = "Paused";
+                Constants.change = "Resume";
+            } else {
+                Constants.text = "Running";
+                Constants.change = "Pause";
+            }
+        }
 
+        NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle("SteadyView")
@@ -47,18 +57,11 @@ public class NotificationService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
 
-        if (intent.getAction().equals("startChange")) {
-            if (Constants.text.equals("Running")) {
-                Constants.text = "Paused";
-                Constants.change = "Resume";
-            } else {
-                Constants.text = "Running";
-                Constants.change = "Pause";
-            }
-            nm.notify(Constants.nId, notification);
-        } else {
+        if (intent.getAction().equals("startNotification"))
             startForeground(Constants.nId, notification);
-        }
+        else
+            nm.notify(Constants.nId, notification);
+
         return Service.START_STICKY;
     }
 
