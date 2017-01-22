@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    
                     web.loadUrl(urlbar.getText().toString());
 
                 }
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             spokenText = results.get(0);
         }
         System.out.println("spokenText: " + spokenText);
-        web.loadUrl(spokenText);
+        web.loadUrl("http://" + spokenText);
         super.onActivityResult(requestCode, resultCode, data);
 
     }
