@@ -82,6 +82,18 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                // Do something
+                int endIndex = failingUrl.lastIndexOf(".");
+                int startIndex = failingUrl.indexOf("//");
+                if(startIndex != -1){
+                    startIndex += 2;
+                }
+                String url = "http://google.com/search?q="+failingUrl.substring(startIndex, endIndex);
+                web.loadUrl(url);
+                urlbar.setText(url);
+            }
         };
 
         View fullbackground = findViewById(R.id.FullBackground);
@@ -109,22 +121,6 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
 
                 }
                 return true;
-            }
-        });
-
-        web.setWebViewClient(new WebViewClient(){
-
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                // Do something
-                int endIndex = failingUrl.lastIndexOf(".");
-                int startIndex = failingUrl.indexOf("//");
-                if(startIndex != -1){
-                    startIndex += 2;
-                }
-                String url = "http://google.com/search?q="+failingUrl.substring(startIndex, endIndex);
-                web.loadUrl(url);
-                urlbar.setText(url);
             }
         });
 
