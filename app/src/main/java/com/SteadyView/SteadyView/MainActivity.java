@@ -55,12 +55,6 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
     double[] v = {0,0};
     double[] p = {0,0};
 
-    rollingQueue[] halfperiods = new rollingQueue[2];
-    rollingQueue[] amplitudes = new rollingQueue[2];
-
-    rollingQueue[] acceleration = new rollingQueue[2];
-    rollingQueue time;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,70 +109,10 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         xdpm = metrics.xdpi/0.0254;
         ydpm = metrics.ydpi/0.0254;
 
-
-        acceleration[0] = new rollingQueue(1000);
-        acceleration[1] = new rollingQueue(1000);
-
-        time = new rollingQueue(1000);
-
-
-
-        int hpsamples = 50;
-        int ampsamples = 50;
-
-        halfperiods[0] = new rollingQueue(hpsamples);
-        halfperiods[1] = new rollingQueue(hpsamples);
-
-        amplitudes[0] = new rollingQueue(ampsamples);
-        amplitudes[1] = new rollingQueue(ampsamples);
-
-        //float inchpix = (float) (metrics.xdpi);
-        //web.setX(inchpix);
-
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_FASTEST);
 
-
-    }
-
-    private class rollingQueue {
-        int maxsize;
-        Deque data;
-
-        public rollingQueue(int size){
-            data = new ArrayDeque<Double>(size);
-            this.maxsize = size;
-        }
-
-        public void push(double d) {
-            data.addFirst(d);
-            if(data.size() > maxsize){
-                data.removeLast();
-            }
-        }
-
-        public double average(){
-            double avg = 0;
-            for(Iterator itr = data.iterator(); itr.hasNext();)  {
-                avg += (double)itr.next();
-            }
-            System.out.println("avg: "+avg/data.size() +","+ data.size());
-            return avg/data.size();
-        }
-
-        public double size(){
-            return data.size();
-        }
-
-        public double[] getArray(){
-            double[] array = new double[data.size()];
-            int count = 0;
-            for (Iterator<Double> i = data.iterator(); i.hasNext();) {
-                array[count++] = i.next();
-            }
-            return array;
-        }
 
     }
 
