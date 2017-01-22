@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.google.vr.sdk.base.Eye;
 import com.google.vr.sdk.base.GvrActivity;
@@ -52,6 +53,8 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
     RollingQueue accelerations;
     double[] v = {0,0};
     double[] p = {0,0};
+
+    private static final double SCALE_X = 0.8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         web.setWebViewClient(new MyClient());
         web.loadUrl("http://reddit.com");
         web.bringToFront();
+
 
         View searchbackground = findViewById(R.id.SearchBackground);
         searchbackground.bringToFront();
@@ -132,6 +136,10 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         display.getRealSize(size);
         width = size.x;
         height = size.y;
+
+        //Make web view thinner
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) web.getLayoutParams();
+        params.width = (int)(width * SCALE_X);
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -198,17 +206,19 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         }
         float scaleup = 1.05f;
 
+        float centerX = (float)(width*(1-SCALE_X)/2);
+
         if (Constants.text.equals("Running")) {
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                web.setX((float) (-xdpm * p[0] * scaleup));
+                web.setX((float) (-xdpm * p[0] * scaleup)+centerX);
                 web.setY((float) (ydpm * p[1] * scaleup) + 150);
             } else {
                 web.setY((float) (xdpm * p[0] * scaleup) + 150);
-                web.setX((float) (ydpm * p[1] * scaleup));
+                web.setX((float) (ydpm * p[1] * scaleup)+centerX);
             }
 
         } else {
-            web.setX((float) 0);
+            web.setX(centerX);
             web.setY((float) 150);
         }
         lastAcceleration[0] = acc[0];
