@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void settingsBtnClicked(View view) {
         System.out.println("Button Clicked AF");
-        Intent settingsIntent = new Intent(this, Settings.class);
+        Intent settingsIntent = new Intent(this, PreferencesActivity.class);
 //        PendingIntent settingsPI = new PendingIntent(this, 0, settingsIntent, 0);
         startActivity(settingsIntent);
     }
