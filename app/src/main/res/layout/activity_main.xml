@@ -26,5 +26,13 @@
         android:id="@+id/editText"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/button" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_above="@+id/webview"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>
