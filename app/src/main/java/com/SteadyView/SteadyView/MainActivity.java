@@ -92,7 +92,6 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             @Override
             public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                //FIXME: ADD HTTP IN FRONT IF NOT ALREADY THERE!
                     String url = prependHTTP(urlbar.getText().toString());
                     System.out.println("url parsed:" + url);
                     web.loadUrl(url);
@@ -230,6 +229,11 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
     }
 
     public String prependHTTP(String url){
+        if(url.length() < 8){
+            StringBuffer tmp = new StringBuffer("http://");
+            tmp.append(url);
+            return tmp.toString();
+        }
         if((url.substring(0,7)).equals("http://") ||
                 (url.substring(0,8)).equals("https://")){
             return url;
