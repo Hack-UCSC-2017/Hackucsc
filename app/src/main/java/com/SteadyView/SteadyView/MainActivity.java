@@ -80,9 +80,18 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         };
+
+        View fullbackground = findViewById(R.id.FullBackground);
+        fullbackground.bringToFront();
+
+
         web.setWebViewClient(new MyClient());
         web.loadUrl("http://reddit.com");
         web.bringToFront();
+
+        View searchbackground = findViewById(R.id.SearchBackground);
+        searchbackground.bringToFront();
+
 
         urlbar.setText("http://reddit.com");
         urlbar.bringToFront();
@@ -176,9 +185,9 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         if (Constants.text.equals("Running")) {
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 web.setX((float) (-xdpm * p[0] * scaleup));
-                web.setY((float) (ydpm * p[1] * scaleup));
+                web.setY((float) (ydpm * p[1] * scaleup) + 150);
             } else {
-                web.setY((float) (xdpm * p[0] * scaleup));
+                web.setY((float) (xdpm * p[0] * scaleup) + 150);
                 web.setX((float) (ydpm * p[1] * scaleup));
             }
 
