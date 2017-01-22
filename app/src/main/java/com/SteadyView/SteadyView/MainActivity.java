@@ -48,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    
-                    web.loadUrl(urlbar.getText().toString());
+                //FIXME: ADD HTTP IN FRONT IF NOT ALREADY THERE!
+                    String url = prependHTTP(urlbar.getText().toString());
+                    System.out.println("url parsed:" + url);
+                    web.loadUrl(url);
+
 
                 }
                 return true;
@@ -61,6 +64,17 @@ public class MainActivity extends AppCompatActivity {
         float inchesX = metrics.widthPixels / metrics.xdpi;
         float metersX = inchesX * 0.0254f;
         float metersY = inchesY * 0.0254f;
+    }
+
+    public String prependHTTP(String url){
+        if((url.substring(0,7)).equals("http://") ||
+                (url.substring(0,8)).equals("https://")){
+            return url;
+        }else{
+            StringBuffer tmp = new StringBuffer("http://");
+            tmp.append(url);
+            return tmp.toString();
+        }
     }
 
     public void speechBtnClicked(View view) {
@@ -90,8 +104,28 @@ public class MainActivity extends AppCompatActivity {
             spokenText = results.get(0);
         }
         System.out.println("spokenText: " + spokenText);
-        web.loadUrl("http://" + spokenText);
+        String temp = urlizeText(spokenText);
+        String url = prependHTTP(temp);
+        web.loadUrl(url);
         super.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    public String urlizeText(String text){
+        String newURL = "";
+        for(int i = 0; i < text.length(); i++){
+            if(text.charAt(i) != ' '){
+                newURL += text.charAt(i);
+            }
+        }
+        int lastI = newURL.lastIndexOf('.');
+        if(newURL.length() - lastI == 3 ||
+                newURL.length() - lastI == 4){
+            return newURL;
+        }else{
+            StringBuffer tmp = new StringBuffer(newURL);
+            tmp.append(".com");
+            return tmp.toString();
+        }
     }
 }
