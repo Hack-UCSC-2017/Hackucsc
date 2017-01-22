@@ -22,6 +22,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import com.google.vr.sdk.base.Eye;
 import com.google.vr.sdk.base.GvrActivity;
@@ -83,7 +85,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         web.setWebViewClient(new MyClient());
         web.loadUrl("http://reddit.com");
         web.bringToFront();
-        
+
         urlbar.setText("http://reddit.com");
         urlbar.bringToFront();
         urlbar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -133,6 +135,19 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        if(SettingsActivity.changed){
+//            web.setLayoutParams(new ScrollView.LayoutParams(
+//                    (int)SettingsActivity.progressX*width,
+//                    (int)SettingsActivity.progressY*height
+//            ));
+
+            web.layout(0, 0,
+                (int)SettingsActivity.progressX*width,
+                (int)SettingsActivity.progressY*height);
+            web.reload();
+            SettingsActivity.changed = false;
+        }
+
         System.out.println(event.values[0] + ","+event.values[1]+","+event.values[2]);
         //0 = x, 1 = y, 2 = z
 

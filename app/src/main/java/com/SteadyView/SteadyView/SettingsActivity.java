@@ -26,7 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressX = ((double)progress/200) + 0.5;
-
+                changed = true;
                 System.out.println(progressX);
             }
 
@@ -45,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progressY = ((double)progress/200) + 0.5;
+                changed = true;
                 System.out.println(progressY);
             }
 
@@ -70,4 +71,8 @@ public class SettingsActivity extends AppCompatActivity {
         stopService(intent);
     }
 
+    public void changesBtnClicked(View view) {
+        Intent mainpageIntent = new Intent(this, MainActivity.class);
+        startActivity(mainpageIntent);
+    }
 }

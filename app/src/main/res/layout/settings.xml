@@ -6,22 +6,6 @@
     >
 
 
-    <!--stop service and kill self for exit-->
-    <!--<ListPreference-->
-        <!--android:dependency="pref_sync"-->
-        <!--android:key="pref_syncConnectionType"-->
-        <!--android:title="@string/pref_syncConnectionType"-->
-        <!--android:dialogTitle="@string/pref_syncConnectionType"-->
-        <!--android:entries="@array/pref_syncConnectionTypes_entries"-->
-        <!--android:entryValues="@array/pref_syncConnectionTypes_values"-->
-        <!--android:defaultValue="@string/pref_syncConnectionTypes_default" />-->
-    <!--<EditText-->
-        <!--android:id="@+id/ScaleX"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="phone" />-->
-
-
     <TextView
         android:id="@+id/TextY"
         android:layout_width="wrap_content"
@@ -66,7 +50,7 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Exit"
+        android:text="Close Notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="47dp"
@@ -74,20 +58,18 @@
         android:onClick="exitBtnClicked"
         android:layout_below="@+id/ScaleY"
         android:layout_centerHorizontal="true" />
-    <!--android:layout_below="@+id/TextY"-->
+
+    <Button
+        android:text="Apply Changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Exit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:id="@+id/button2"
+        android:onClick="changesBtnClicked"/>
 
 </RelativeLayout>
 
 
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-    <!--<EditTextPreference-->
-        <!--android:dialogTitle="Enter Name"-->
-        <!--android:key="name"-->
-        <!--android:summary="Enter Your Name"-->
-        <!--android:title="Edit Text Preference" />-->
-<!--</PreferenceScreen>-->
 
