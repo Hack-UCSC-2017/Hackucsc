@@ -84,8 +84,6 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         web.loadUrl("http://reddit.com");
         web.bringToFront();
 
-
-
         urlbar.setText("http://reddit.com");
         urlbar.bringToFront();
         urlbar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
