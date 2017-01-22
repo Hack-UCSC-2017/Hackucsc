@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     rollingQueue[] halfperiods = new rollingQueue[2];
     rollingQueue[] amplitudes = new rollingQueue[2];
 
+    rollingQueue[] acceleration = new rollingQueue[2];
+    rollingQueue time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +70,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         ydpm = metrics.ydpi/0.0254;
 
 
-        int hpsamples = 100;
-        int ampsamples = 100;
+        acceleration[0] = new rollingQueue(1000);
+        acceleration[1] = new rollingQueue(1000);
+
+        time = new rollingQueue(1000);
+
+
+
+        int hpsamples = 50;
+        int ampsamples = 50;
 
         halfperiods[0] = new rollingQueue(hpsamples);
         halfperiods[1] = new rollingQueue(hpsamples);
@@ -116,6 +125,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             return data.size();
         }
 
+        public double[] getArray(){
+            double[] array = new double[data.size()];
+            int count = 0;
+            for (Iterator<Double> i = data.iterator(); i.hasNext();) {
+                array[count++] = i.next();
+            }
+            return array;
+        }
+
     }
 
     double[] A = {1,1};
@@ -138,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             double dt = (double)(event.timestamp-lastSensorTimestamp)/1.0e9;
             double timestamp = event.timestamp/1.0e9;
             for(int i = 0; i < 2; i++) {
+                /*
                 if (Math.signum(acc[i]) != Math.signum(lastAcceleration[i])){
 
                     if(lastZeroTime[i] != -1) {
@@ -160,38 +179,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 if(i == 0){
                     web.setX((float)(-xdpm*offset));
                 } else {
-                    web.setY((float)(-ydpm*offset));
+                    web.setY((float)(ydpm*offset));
                 }
+                */
 
-            }
-
-            //web.setX((float)(-xdpm*p[0]));
-            //web.setY((float)(-ydpm*p[1]));
-
-
-
-            //lastAcceleration[1] = acc[1];
-            /*
-            for(int i = 0; i < 2; i++) {
-                if(Math.abs(event.values[i]) >  0.2){
-                    v[i] += (event.values[i])*dt;
-                }
+                v[i] += (acc[i])*dt;
                 v[i] *=0.95;
 
 
                 p[i] += v[i]*dt;
-                p[i]*=0.9;
-                */
+                p[i]*=0.95;
 
-            //}
-            //web.setX((float)(-xdpm*p[0]));
-            //web.setY((float)(-ydpm*p[1]));
+            }
 
             System.out.println(dt +",("+ p[0] +","+ p[1] +"),("+v[0] +","+ v[1]+")");
 
         }
+        float scaleup = 1.05f;
+        web.setX((float)(-xdpm*p[0]*scaleup));
+        web.setY((float)(ydpm*p[1]*scaleup));
+
         lastAcceleration[0] = acc[0];
         lastAcceleration[1] = acc[1];
+
         lastSensorTimestamp = event.timestamp;
     }
 
