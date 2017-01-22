@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -26,19 +27,9 @@
         android:id="@+id/editText"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/buttonTalk" />
+        android:layout_toStartOf="@+id/buttonTalk"
+        tools:ignore="LabelFor" />
 
-
-    <Button
-        android:text="@string/Talk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonTalk"
-        android:onClick="speechBtnClicked"
-        android:layout_marginEnd="89dp"
-        android:layout_above="@+id/webview"
-        android:layout_alignParentEnd="true"
-        android:layout_toStartOf="@+id/buttonSettings"/>
 
     <Button
         android:text="@string/Settings"
@@ -53,7 +44,17 @@
     <com.google.vr.sdk.base.GvrView
         android:id="@+id/gvr_view"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentStart="true" />
+        android:layout_height="fill_parent">
+
+    </com.google.vr.sdk.base.GvrView>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:srcCompat="@android:drawable/ic_btn_speak_now"
+        android:src="@android:drawable/ic_btn_speak_now"
+        android:id="@+id/buttonTalk"
+        android:onClick="speechBtnClicked (MainActivity)"
+        android:layout_toStartOf="@+id/buttonSettings"
+        android:layout_above="@+id/webview" />
 </RelativeLayout>
