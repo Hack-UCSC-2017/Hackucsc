@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.SteadyView.SteadyView">
 
+    <uses-feature android:name="android.software.vr.mode" android:required="true" />
+    <uses-feature android:name="android.software.vr.high_performance" android:required="true"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -10,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+            android:enableVrMode="@string/gvr_vr_mode_component"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
