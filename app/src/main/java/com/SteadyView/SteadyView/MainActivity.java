@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
         urlbar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_NULL
-                        && event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     web.loadUrl(urlbar.getText().toString());
                 }
                 return true;
