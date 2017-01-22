@@ -1,6 +1,7 @@
 package com.SteadyView.SteadyView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -64,7 +65,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void exitBtnClicked(View view) {
         System.out.println("exit button Clicked AF");
-        //FIXME: Ray code here..
+
+        Intent intent = new Intent(this, NotificationService.class);
+        stopService(intent);
     }
 
 }

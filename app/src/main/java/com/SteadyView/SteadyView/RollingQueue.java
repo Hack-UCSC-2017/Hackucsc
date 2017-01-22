@@ -10,27 +10,28 @@ import java.util.Iterator;
 
 public class RollingQueue {
     int maxsize;
+    double datasum;
     Deque data;
 
     public RollingQueue(int size){
         data = new ArrayDeque<Double>(size);
-        this.maxsize = size;
+        maxsize = size;
+        datasum = 0;
     }
 
     public void push(double d) {
         data.addFirst(d);
+        datasum += d;
         if(data.size() > maxsize){
-            data.removeLast();
+            datasum -= (double)data.removeLast();
         }
     }
 
     public double average(){
-        double avg = 0;
-        for(Iterator itr = data.iterator(); itr.hasNext();)  {
-            avg += (double)itr.next();
-        }
-        System.out.println("avg: "+avg/data.size() +","+ data.size());
-        return avg/data.size();
+        //double avg = 0;
+
+        //System.out.println("avg: "+avg/data.size() +","+ data.size());
+        return datasum/data.size();
     }
 
     public double size(){
