@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SteadyView</string>
+    <string name="url">url</string>
+    <string name="Talk">Talk</string>
+    <string name="Settings">Settings</string>
 </resources>

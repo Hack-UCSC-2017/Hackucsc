@@ -21,24 +21,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/url"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/button" />
-    <com.google.vr.sdk.base.GvrView
-        android:id="@+id/gvr_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_toStartOf="@+id/buttonTalk" />
 
 
     <Button
-        android:text="Talk"
+        android:text="@string/Talk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:id="@+id/buttonTalk"
+        android:onClick="speechBtnClicked"
+        android:layout_marginEnd="89dp"
         android:layout_above="@+id/webview"
         android:layout_alignParentEnd="true"
-        android:onClick="speechBtnClicked"/>
+        android:layout_toStartOf="@+id/buttonSettings"/>
+
+    <Button
+        android:text="@string/Settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSettings"
+        android:layout_above="@+id/webview"
+        android:layout_alignParentEnd="true"
+        android:onClick="settingsBtnClicked"
+        />
+
+    <com.google.vr.sdk.base.GvrView
+        android:id="@+id/gvr_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
