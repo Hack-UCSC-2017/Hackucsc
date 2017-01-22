@@ -35,5 +35,5 @@
         android:id="@+id/button"
         android:layout_above="@+id/webview"
         android:layout_alignParentEnd="true"
-        android:onclick="speechBtnClick"/>
+        android:onClick="speechBtnClicked"/>
 </RelativeLayout>
