@@ -31,16 +31,6 @@
         tools:ignore="LabelFor" />
 
 
-    <Button
-        android:text="@string/Settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonSettings"
-        android:layout_above="@+id/webview"
-        android:layout_alignParentEnd="true"
-        android:onClick="settingsBtnClicked"
-        />
-
     <com.google.vr.sdk.base.GvrView
         android:id="@+id/gvr_view"
         android:layout_width="fill_parent"
@@ -56,5 +46,16 @@
         android:id="@+id/buttonTalk"
         android:onClick="speechBtnClicked"
         android:layout_toStartOf="@+id/buttonSettings"
-        android:layout_above="@+id/webview" />
+        android:layout_above="@+id/webview"
+        android:contentDescription="@string/Talk" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_manage"
+        android:src="@android:drawable/ic_menu_manage"
+        android:id="@+id/buttonSettings"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/webview"
+        android:onClick="settingsBtnClicked" />
 </RelativeLayout>
