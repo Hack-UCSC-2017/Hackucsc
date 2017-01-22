@@ -29,10 +29,11 @@
         android:layout_toStartOf="@+id/button" />
 
     <Button
-        android:text="Button"
+        android:text="Talk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
         android:layout_above="@+id/webview"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onclick="speechBtnClick"/>
 </RelativeLayout>

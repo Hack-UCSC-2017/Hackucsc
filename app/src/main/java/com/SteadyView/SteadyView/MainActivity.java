@@ -56,4 +56,5 @@ public class MainActivity extends AppCompatActivity {
         float metersX = inchesX * 0.0254f;
         float metersY = inchesY * 0.0254f;
     }
+    
 }
