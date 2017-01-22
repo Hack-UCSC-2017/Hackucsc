@@ -1,22 +1,50 @@
 package com.SteadyView.SteadyView;
 
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    WebView web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        WebView web = (WebView)findViewById(R.id.webview);
+        web = (WebView)findViewById(R.id.webview);
+        final EditText urlbar = (EditText)findViewById(R.id.editText);
         web.getSettings().setJavaScriptEnabled(true);
-        web.setWebViewClient(new WebViewClient());
+        class MyClient extends WebViewClient {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                urlbar.setText(url);
+            }
+        };
+        web.setWebViewClient(new MyClient());
         web.loadUrl("http://reddit.com");
+
+
+
+        urlbar.setText("http://reddit.com");
+        urlbar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_NULL
+                        && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    web.loadUrl(urlbar.getText().toString());
+                }
+                return true;
+            }
+        });
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float inchesY = metrics.heightPixels / metrics.ydpi;
