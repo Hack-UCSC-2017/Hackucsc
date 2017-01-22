@@ -298,4 +298,11 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             return tmp.toString();
         }
     }
+
+    public void settingsBtnClicked(View view) {
+        System.out.println("settings button Clicked AF");
+        Intent settingsIntent = new Intent(this, SettingsActivity.class);
+//        PendingIntent settingsPI = new PendingIntent(this, 0, settingsIntent, 0);
+        startActivity(settingsIntent);
+    }
 }
