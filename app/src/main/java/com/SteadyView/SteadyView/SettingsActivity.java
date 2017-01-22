@@ -9,6 +9,9 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 
 
 public class SettingsActivity extends AppCompatActivity {
+    public static double progressX = 0;
+    public static double progressY = 0;
+    public static boolean changed = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,22 +20,51 @@ public class SettingsActivity extends AppCompatActivity {
         SeekBar seekBarX = (SeekBar) findViewById(R.id.ScaleX);
         SeekBar seekBarY = (SeekBar) findViewById(R.id.ScaleY);
 
+        seekBarX.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressX = ((double)progress/200) + 0.5;
+
+                System.out.println(progressX);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        seekBarY.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressY = ((double)progress/200) + 0.5;
+                System.out.println(progressY);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
         System.out.println("inside settings button class boiiiiiis");
     }
 
-    public void settingsBtnClicked(View view) {
+    public void exitBtnClicked(View view) {
         System.out.println("exit button Clicked AF");
         //FIXME: Ray code here..
     }
 
-//    private SeekBar.OnSeekBarChangeListener seekBarScaleListener =
-//            new SeekBar.OnSeekBarChangeListener() (
-//                @Override
-//                public void onProgressChanged(SeekBar seekBar, int progress,
-//                                              boolean fromUser){
-//
-//                }
-//            );
 }

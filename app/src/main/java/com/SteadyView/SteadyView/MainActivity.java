@@ -85,7 +85,6 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         web.bringToFront();
 
 
-
         urlbar.setText("http://reddit.com");
         urlbar.bringToFront();
         urlbar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -198,6 +197,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         lastAcceleration[1] = acc[1];
 
         lastSensorTimestamp = event.timestamp;
+        //web.setInitialScale();
     }
 
     @Override
