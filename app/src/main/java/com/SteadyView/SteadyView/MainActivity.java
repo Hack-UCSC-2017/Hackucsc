@@ -193,7 +193,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
 
         } else {
             web.setX((float) 0);
-            web.setY((float) 0);
+            web.setY((float) 150);
         }
         lastAcceleration[0] = acc[0];
         lastAcceleration[1] = acc[1];
