@@ -2,6 +2,7 @@ package com.SteadyView.SteadyView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
@@ -185,9 +186,13 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
 
         }
         float scaleup = 1.05f;
-        web.setX((float)(-xdpm*p[0]*scaleup));
-        web.setY((float)(ydpm*p[1]*scaleup));
-
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            web.setX((float) (-xdpm * p[0] * scaleup));
+            web.setY((float) (ydpm * p[1] * scaleup));
+        } else {
+            web.setY((float) (xdpm * p[0] * scaleup));
+            web.setX((float) (ydpm * p[1] * scaleup));
+        }
         lastAcceleration[0] = acc[0];
         lastAcceleration[1] = acc[1];
 
@@ -197,6 +202,18 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        widthMeters = 0.0254*(double)width/metrics.xdpi;
+        heightMeters = 0.0254*(double)height/metrics.ydpi;
+        xdpm = metrics.xdpi/0.0254;
+        ydpm = metrics.ydpi/0.0254;
     }
 
     protected void onPause() {
