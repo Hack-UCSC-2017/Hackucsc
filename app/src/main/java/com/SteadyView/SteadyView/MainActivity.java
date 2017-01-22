@@ -1,5 +1,6 @@
 package com.SteadyView.SteadyView;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -41,6 +43,8 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 urlbar.setText(url);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         };
         web.setWebViewClient(new MyClient());
@@ -56,6 +60,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer 
             public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     web.loadUrl(urlbar.getText().toString());
+
                 }
                 return true;
             }
@@ -69,7 +74,6 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer 
         float metersY = inchesY * 0.0254f;
     }
 
-
     @Override
     public void onNewFrame(HeadTransform headTransform) {}
     @Override
@@ -82,4 +86,12 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer 
     public void onSurfaceCreated(EGLConfig eglConfig) {}
     @Override
     public void onRendererShutdown() {}
+    @Override
+    public void onBackPressed() {
+        if (web.canGoBack()) {
+            web.goBack();
+        } else {
+            finish();
+        }
+    }
 }
