@@ -6,13 +6,79 @@
     >
 
 
-    <CheckBox
-        android:text="CheckBox"
+    <!--stop service and kill self for exit-->
+    <!--<ListPreference-->
+        <!--android:dependency="pref_sync"-->
+        <!--android:key="pref_syncConnectionType"-->
+        <!--android:title="@string/pref_syncConnectionType"-->
+        <!--android:dialogTitle="@string/pref_syncConnectionType"-->
+        <!--android:entries="@array/pref_syncConnectionTypes_entries"-->
+        <!--android:entryValues="@array/pref_syncConnectionTypes_values"-->
+        <!--android:defaultValue="@string/pref_syncConnectionTypes_default" />-->
+    <!--<EditText-->
+        <!--android:id="@+id/ScaleX"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="phone" />-->
+
+
+
+    <TextView
+        android:id="@+id/TextX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Scale the width of the page"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="61dp"
-        android:id="@+id/checkBox" />
+        android:layout_marginStart="12dp"/>
+
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ScaleX"
+        android:max="100"
+        android:progress="1"
+        android:progressDrawable="@android:color/white"
+        android:contentDescription="Scale the X axis"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/TextY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scale the height of the page"
+        android:layout_below="@+id/ScaleX"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_marginTop="58dp" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ScaleY"
+        android:max="100"
+        android:progress="1"
+        android:progressDrawable="@android:color/white"
+        android:contentDescription="Scale the Y axis"
+        android:layout_marginTop="71dp"
+        android:layout_below="@+id/TextY"
+        android:layout_centerHorizontal="true" />
+    <!--android:layout_below="@+id/TextY"-->
+
 </RelativeLayout>
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<EditTextPreference-->
+        <!--android:dialogTitle="Enter Name"-->
+        <!--android:key="name"-->
+        <!--android:summary="Enter Your Name"-->
+        <!--android:title="Edit Text Preference" />-->
+<!--</PreferenceScreen>-->
+
