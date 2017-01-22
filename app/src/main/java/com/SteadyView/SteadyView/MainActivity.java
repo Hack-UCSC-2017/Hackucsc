@@ -99,12 +99,26 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             @Override
             public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                    String url = prependHTTP(urlbar.getText().toString());
+                    String url = urlizeText(prependHTTP(urlbar.getText().toString()));
                     System.out.println("url parsed:" + url);
                     web.loadUrl(url);
 
                 }
                 return true;
+            }
+        });
+
+        web.setWebViewClient(new WebViewClient(){
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                // Do something
+                int endIndex = failingUrl.lastIndexOf(".");
+                int startIndex = failingUrl.indexOf("//");
+                if(startIndex != -1){
+                    startIndex += 2;
+                }
+                web.loadUrl("http://google.com/search?q="+failingUrl.substring(startIndex, endIndex));
             }
         });
 
@@ -308,8 +322,8 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             }
         }
         int lastI = newURL.lastIndexOf('.');
-        if(newURL.length() - lastI == 3 ||
-                newURL.length() - lastI == 4){
+       // if(newURL.length() - lastI == 3 || newURL.length() - lastI == 4|| lastI != -1){
+        if(lastI != -1 ) {
             return newURL;
         }else{
             StringBuffer tmp = new StringBuffer(newURL);
