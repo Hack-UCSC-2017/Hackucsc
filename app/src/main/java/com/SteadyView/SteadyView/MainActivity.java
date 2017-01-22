@@ -102,6 +102,8 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             }
         });
 
+        findViewById(R.id.button).bringToFront();
+
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -233,8 +235,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             StringBuffer tmp = new StringBuffer("http://");
             tmp.append(url);
             return tmp.toString();
-        }
-        if((url.substring(0,7)).equals("http://") ||
+        } else if((url.substring(0,7)).equals("http://") ||
                 (url.substring(0,8)).equals("https://")){
             return url;
         }else{
