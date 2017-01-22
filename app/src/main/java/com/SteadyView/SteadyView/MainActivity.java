@@ -108,8 +108,8 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             }
         });
 
-        findViewById(R.id.button).bringToFront();
-
+        findViewById(R.id.buttonTalk).bringToFront();
+        findViewById(R.id.buttonSettings).bringToFront();
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -130,6 +130,12 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_FASTEST);
 
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        setImmersive(false);
 
     }
 
@@ -318,5 +324,12 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             tmp.append(".com");
             return tmp.toString();
         }
+    }
+
+    public void settingsBtnClicked(View view) {
+        System.out.println("settings button Clicked AF");
+        Intent settingsIntent = new Intent(this, SettingsActivity.class);
+//        PendingIntent settingsPI = new PendingIntent(this, 0, settingsIntent, 0);
+        startActivity(settingsIntent);
     }
 }

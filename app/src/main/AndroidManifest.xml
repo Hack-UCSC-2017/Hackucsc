@@ -11,7 +11,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/VrActivityTheme">
+        android:theme="@style/Theme.AppCompat.Light">
+        <!--        android:theme="@style/VrActivityTheme"-->
         <activity android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:enableVrMode="@string/gvr_vr_mode_component"
@@ -32,6 +33,16 @@
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         <!--</activity>-->
+        <activity android:name=".SettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:enableVrMode="@string/gvr_vr_mode_component">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="com.google.intent.category.CARDBOARD" />
+                <category android:name="com.google.intent.category.DAYDREAM"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
