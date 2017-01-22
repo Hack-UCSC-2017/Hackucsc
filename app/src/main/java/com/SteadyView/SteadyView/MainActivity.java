@@ -65,6 +65,10 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(this, NotificationService.class);
+        intent.setAction("startNotification");
+        startService(intent);
+
         //enable VR
         GvrView gvrView = (GvrView)findViewById(R.id.gvr_view);
         gvrView.setRenderer(this);
