@@ -1,5 +1,7 @@
 package com.SteadyView.SteadyView;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -14,16 +16,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        WebView web = (WebView)findViewById(R.id.webview);
+        WebView web = (WebView) findViewById(R.id.webview);
         web.getSettings().setJavaScriptEnabled(true);
         web.setWebViewClient(new WebViewClient());
         web.loadUrl("http://reddit.com");
-
-
-
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content,
-                          new MainSettingsFragment()).commit();
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float inchesY = metrics.heightPixels / metrics.ydpi;
@@ -31,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
         float metersX = inchesX * 0.0254f;
         float metersY = inchesY * 0.0254f;
     }
-    public static class MainSettingsFragment extends PreferenceFragment{
-        @Override
-        public void onCreate(Bundle savedInstaanceState){
-            super.onCreate(savedInstaanceState);
-            System.out.println(R.xml.preferences);
-            addPreferencesFromResource(R.xml.preferences);
-        }
+
+    public void settingsBtnClicked(View view) {
+        System.out.println("Button Clicked AF");
+        Intent settingsIntent = new Intent(this, Settings.class);
+//        PendingIntent settingsPI = new PendingIntent(this, 0, settingsIntent, 0);
+        startActivity(settingsIntent);
     }
+
 }
