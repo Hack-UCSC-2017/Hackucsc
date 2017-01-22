@@ -66,6 +66,10 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(this, NotificationService.class);
+        intent.setAction("startNotification");
+        startService(intent);
+
         //enable VR
         GvrView gvrView = (GvrView)findViewById(R.id.gvr_view);
         gvrView.setRenderer(this);
@@ -179,12 +183,19 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
 
         }
         float scaleup = 1.05f;
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            web.setX((float) (-xdpm * p[0] * scaleup));
-            web.setY((float) (ydpm * p[1] * scaleup) );
+
+        if (Constants.text.equals("Running")) {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                web.setX((float) (-xdpm * p[0] * scaleup));
+                web.setY((float) (ydpm * p[1] * scaleup));
+            } else {
+                web.setY((float) (xdpm * p[0] * scaleup));
+                web.setX((float) (ydpm * p[1] * scaleup));
+            }
+
         } else {
-            web.setY((float) (xdpm * p[0] * scaleup));
-            web.setX((float) (ydpm * p[1] * scaleup));
+            web.setX((float) 0);
+            web.setY((float) 0);
         }
         lastAcceleration[0] = acc[0];
         lastAcceleration[1] = acc[1];
