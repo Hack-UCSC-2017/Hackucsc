@@ -306,7 +306,7 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
         }
         System.out.println("spokenText: " + spokenText);
         if(spokenText != "") {
-            if (spokenText.substring(0, 7).equals("search ")) {
+            if (spokenText.length() > 7 && spokenText.substring(0, 7).equals("search ")) {
                 web.loadUrl("http://google.com/search?q=" +
                         spokenText.substring(7, spokenText.length()));
             } else {
