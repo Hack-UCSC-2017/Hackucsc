@@ -118,7 +118,9 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
                 if(startIndex != -1){
                     startIndex += 2;
                 }
-                web.loadUrl("http://google.com/search?q="+failingUrl.substring(startIndex, endIndex));
+                String url = "http://google.com/search?q="+failingUrl.substring(startIndex, endIndex);
+                web.loadUrl(url);
+                urlbar.setText(url);
             }
         });
 
