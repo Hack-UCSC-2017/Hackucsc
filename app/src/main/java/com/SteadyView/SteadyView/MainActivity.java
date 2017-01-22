@@ -272,9 +272,11 @@ public class MainActivity extends GvrActivity implements GvrView.StereoRenderer,
             spokenText = results.get(0);
         }
         System.out.println("spokenText: " + spokenText);
-        String temp = urlizeText(spokenText);
-        String url = prependHTTP(temp);
-        web.loadUrl(url);
+        if(spokenText != "") {
+            String temp = urlizeText(spokenText);
+            String url = prependHTTP(temp);
+            web.loadUrl(url);
+        }
         super.onActivityResult(requestCode, resultCode, data);
 
     }
