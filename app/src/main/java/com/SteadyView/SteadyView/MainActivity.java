@@ -9,6 +9,10 @@ import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
 
+    static {
+        System.loadLibrary("Framebuffer");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,5 +27,16 @@ public class MainActivity extends AppCompatActivity {
         float inchesX = metrics.widthPixels / metrics.xdpi;
         float metersX = inchesX * 0.0254f;
         float metersY = inchesY * 0.0254f;
+        new Thread(new Runnable() {
+            public void run() {
+            }
+        }).start();
+        System.loadLibrary("Framebuffer");
+
+        System.out.println(stringFromJNI());
+        System.out.println(framebuffer());
     }
+
+    public native String stringFromJNI();
+    public native int framebuffer();
 }
